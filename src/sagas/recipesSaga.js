@@ -2,21 +2,28 @@ import { call, put, takeLatest, all } from "redux-saga/effects";
 
 import localStorageService from "../services/localStorageService";
 
-function* fetchRecipes() {
-  let recipes = yield call(localStorageService.getItems);
-  yield put({ type: "RECIPES/FETCH_SUCCESSFULLY", payload: { recipes } });
+function* localStorageRecipes() {
+  try {
+    let recipes = yield call(localStorageService.getItems);
+    yield put({
+      type: "RECIPES/LOCAL_STORAGE_SUCCESSFULLY",
+      payload: { recipes },
+    });
+  } catch ({ message }) {
+    yield put({ type: "RECIPES/LOCAL_STORAGE_ERROR", payload: { message } });
+  }
 }
 
 function* addRecipe() {
-  let currentRecipes = yield call(localStorageService.save);
+  let currentRecipe = yield call(localStorageService.save);
   yield put({
     type: "RECIPES/ADDED_NEW_RECIPE_SUCCESSFULLY",
-    payload: { currentRecipes },
+    payload: { currentRecipe },
   });
 }
 
-function* fetchRecipesSaga() {
-  yield takeLatest("RECIPES/FETCH", fetchRecipes);
+function* localStorageRecipesSaga() {
+  yield takeLatest("RECIPES/LOCAL_STORAGE", localStorage);
 }
 
 function* addRecipeSaga() {
@@ -24,5 +31,5 @@ function* addRecipeSaga() {
 }
 
 export default function* recipesSaga() {
-  yield all([fetchRecipesSaga(), addRecipeSaga()]);
+  yield all([localStorageRecipesSaga(), addRecipeSaga()]);
 }
