@@ -19,12 +19,12 @@ const useStyles = makeStyles({
 function Recipes({
   items,
   onItemRemove,
-  localStorageRecipes,
+  fetchRecipes,
   localStorageRecipesError,
 }) {
   useEffect(() => {
-    localStorageRecipes();
-  }, [localStorageRecipes]);
+    fetchRecipes();
+  }, [fetchRecipes]);
 
   useEffect(() => {
     if (localStorageRecipesError) {
