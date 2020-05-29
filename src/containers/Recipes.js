@@ -16,9 +16,9 @@ const mapDispatchToProps = (dispatch) => {
           id,
         },
       }),
-    localStorageRecipes: () =>
+    fetchRecipes: () =>
       dispatch({
-        type: "RECIPES/LOCAL_STORAGE",
+        type: "RECIPES/FETCH_RECIPES",
       }),
   };
 };

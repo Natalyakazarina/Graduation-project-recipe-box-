@@ -1,6 +1,9 @@
 const DATA_KEY = "DATA_KEY";
 
 class RecipesService {
+  constructor (){
+    this.save=this.save.bind(this)
+  }
   save(data) {
     const currentRecipe = this.get();
 

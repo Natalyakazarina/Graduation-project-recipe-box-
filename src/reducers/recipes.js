@@ -21,14 +21,14 @@ const initialState = {
 
 function recipesReducer(state = initialState, action) {
   switch (action.type) {
-    case "RECIPES/LOCAL_STORAGE_SUCCESSFULLY":
+    case "RECIPES/FETCH_RECIPES_SUCCESSFULLY":
       return update(state, {
         $merge: {
           recipes: action.payload.recipes,
         },
       });
 
-    case "RECIPES/LOCAL_STORAGE_ERROR":
+    case "RECIPES/FETCH_RECIPES_ERROR":
       return update(state, {
         $merge: {
           localStorageRecipesError: action.payload.message,
@@ -60,7 +60,7 @@ function recipesReducer(state = initialState, action) {
     case "RECIPES/ADDED_NEW_RECIPE_SUCCESSFULLY":
       return update(state, {
         recipes: {
-          $push: [action.payload.currentRecipe],
+          $push: [action.payload],
         },
       });
 
