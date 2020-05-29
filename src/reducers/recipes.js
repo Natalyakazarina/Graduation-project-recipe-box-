@@ -15,13 +15,26 @@ const initialState = {
         "4 ounces linguine pasta; 2 skinless, boneless chicken breast halves; 2 teaspoons Cajun seasoning; 2 tablespoons butter; 1 red bell sliced pepper; 1 green bell sliced pepper; 4 fresh sliced mushrooms; 1 green chopped onion; 1 cup heavy cream; ¼ teaspoon dried basil; ¼ teaspoon lemon pepper; ¼ teaspoon salt; ⅛ teaspoon garlic powder; ⅛ teaspoon ground black pepper; ¼ cup grated Parmesan cheese",
     },
   ],
-  editSuccessfully: false,
-  createRecipeErrorMessage: "",
-  fetchRecipeErrorMessage: "",
+
+  localStorageRecipesError: "",
 };
 
 function recipesReducer(state = initialState, action) {
   switch (action.type) {
+    case "RECIPES/LOCAL_STORAGE_SUCCESSFULLY":
+      return update(state, {
+        $merge: {
+          recipes: action.payload.recipes,
+        },
+      });
+
+    case "RECIPES/LOCAL_STORAGE_ERROR":
+      return update(state, {
+        $merge: {
+          localStorageRecipesError: action.payload.message,
+        },
+      });
+
     case "RECIPES/RECIPE_REMOVE":
       const fromState = state.recipes.slice();
       let indexToRemove;
@@ -44,17 +57,10 @@ function recipesReducer(state = initialState, action) {
         },
       });
 
-    case "RECIPES/FETCH_SUCCESSFULLY":
-      return update(state, {
-        $merge: {
-          recipes: action.payload.recipes,
-        },
-      });
-
     case "RECIPES/ADDED_NEW_RECIPE_SUCCESSFULLY":
       return update(state, {
         recipes: {
-          $push: [action.payload],
+          $push: [action.payload.currentRecipe],
         },
       });
 
@@ -72,12 +78,6 @@ function recipesReducer(state = initialState, action) {
         },
       });
 
-    case "RECIPES/FETCH_ERROR":
-      return update(state, {
-        $merge: {
-          fetchrecipeErrorMessage: action.payload.message,
-        },
-      });
     default:
       return state;
   }

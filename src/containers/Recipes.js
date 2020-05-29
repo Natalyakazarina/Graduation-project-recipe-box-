@@ -4,7 +4,7 @@ import Recipes from "../components/Recipes";
 const mapStateToProps = (state) => {
   return {
     items: state.recipes.recipes,
-    fetchRecipeErrorMessage: state.recipes.fetchRecipeErrorMessage,
+    localStorageRecipesError: state.recipes.localStorageRecipesError,
   };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -16,9 +16,9 @@ const mapDispatchToProps = (dispatch) => {
           id,
         },
       }),
-    fetchRecipes: () =>
+    localStorageRecipes: () =>
       dispatch({
-        type: "RECIPES/FETCH",
+        type: "RECIPES/LOCAL_STORAGE",
       }),
   };
 };

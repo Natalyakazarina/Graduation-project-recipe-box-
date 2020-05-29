@@ -2,11 +2,11 @@ const DATA_KEY = "DATA_KEY";
 
 class RecipesService {
   save(data) {
-    const recipes = this.get();
+    const currentRecipe = this.get();
 
-    recipes.push({ id: recipes.length, ...data });
+    currentRecipe.push({ id: currentRecipe.length, ...data });
 
-    window.localStorage.setItem(DATA_KEY, JSON.stringify(recipes));
+    window.localStorage.setItem(DATA_KEY, JSON.stringify(currentRecipe));
   }
 
   get() {

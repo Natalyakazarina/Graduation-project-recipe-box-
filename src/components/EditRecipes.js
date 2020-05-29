@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "bootstrap/dist/css/bootstrap.css";
-
+import TextField from "@material-ui/core/TextField";
+import DialogContent from "@material-ui/core/DialogContent";
 import PropTypes from "prop-types";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles/index";
@@ -17,6 +17,12 @@ const useStyles = makeStyles({
     width: "1860",
     marginRight: "10px",
   },
+  texts: {
+    width: "600px",
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "#fff",
+  },
 });
 
 function EditRecipes({ addRecipe, errorMessage, editSuccessfully, reset }) {
@@ -30,6 +36,8 @@ function EditRecipes({ addRecipe, errorMessage, editSuccessfully, reset }) {
   }, [errorMessage]);
 
   function saveRecipe(e) {
+    e.preventDefault();
+
     addRecipe({
       name,
       description,
@@ -61,27 +69,34 @@ function EditRecipes({ addRecipe, errorMessage, editSuccessfully, reset }) {
     <Container className={classes.container}>
       <div>
         <form>
-          <div className="form-group" key={name}>
+          <DialogContent>
             <label htmlFor="name">{"Name"}</label>
-            <input
-              value={name}
-              className="form-control"
+            <TextField
+              className={classes.texts}
+              onChange={changeField.bind(this, "Name")}
+              autoFocus
+              margin="dense"
               id="name"
               placeholder={`Enter Name`}
-              onChange={changeField.bind(this, "Name")}
-              required
+              type="text"
+              fullWidth
+              value={name}
+              variant="outlined"
             />
-            <label htmlFor="description">{"Description"}</label>
-            <textarea
+
+            <label htmlFor="standard-multiline-flexible">{"Description"}</label>
+
+            <TextField
+              className={classes.texts}
+              id="standard-multiline-flexible"
+              multiline
+              rowsMax={4}
               value={description}
               onChange={changeField.bind(this, "Description")}
-              className="form-control"
-              id="description"
-              rows="3"
               placeholder={`Enter Description`}
-              required
+              variant="outlined"
             />
-          </div>
+          </DialogContent>
 
           <button
             type="submit"

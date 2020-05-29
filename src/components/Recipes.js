@@ -19,18 +19,18 @@ const useStyles = makeStyles({
 function Recipes({
   items,
   onItemRemove,
-  fetchRecipes,
-  fetchRecipeErrorMessage,
+  localStorageRecipes,
+  localStorageRecipesError,
 }) {
   useEffect(() => {
-    fetchRecipes();
-  }, [fetchRecipes]);
+    localStorageRecipes();
+  }, [localStorageRecipes]);
 
   useEffect(() => {
-    if (fetchRecipeErrorMessage) {
-      alert(fetchRecipeErrorMessage);
+    if (localStorageRecipesError) {
+      alert(localStorageRecipesError);
     }
-  }, [fetchRecipeErrorMessage]);
+  }, [localStorageRecipesError]);
 
   const classes = useStyles();
 
