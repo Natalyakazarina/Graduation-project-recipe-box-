@@ -115,7 +115,7 @@ function EditRecipes({ addRecipe, errorMessage, editSuccessfully, reset }) {
 }
 
 EditRecipes.propTypes = {
-  saveRecipe: PropTypes.func.isRequired,
+  addRecipe: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
   editSuccessfully: PropTypes.bool,
   reset: PropTypes.func,
