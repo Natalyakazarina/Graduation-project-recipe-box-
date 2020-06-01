@@ -17,3 +17,15 @@ body {
   justify-content: space-around;
   margin-left: 5px;
 }
+
+.list-group {
+  overflow: auto;
+  height: 400px;
+  border-radius:5%;
+}
+.picture{
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  margin-top: 50px;
+}

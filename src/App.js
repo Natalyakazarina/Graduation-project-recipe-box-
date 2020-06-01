@@ -17,6 +17,7 @@ import RecipeForm from "./components/RecipeForm";
 import EditRecipes from "./containers/EditRecipes";
 import Recipes from "./containers/Recipes";
 import RemoveRecipes from "./containers/RemoveRecipes";
+import ButtonsList from "./components/ButtonsList";
 
 const useStyles = makeStyles({
   root: {
@@ -91,6 +92,9 @@ function App() {
             <Button variant="contained" color="default" disableElevation>
               Beef Wellington
             </Button>
+          </MenuItem>
+          <MenuItem>
+            <ButtonsList />
           </MenuItem>
         </MenuList>
       </Paper>
