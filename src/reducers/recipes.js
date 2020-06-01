@@ -6,7 +6,7 @@ const initialState = {
       id: 1,
       name: "Beef Wellington",
       description:
-        "2 x 400g beef fillets; <br>Olive oil, for frying; 500g mixture of wild mushrooms, cleaned; 1 thyme sprig, leaves only; 500g puff pastry; 8 slices of Parma ham; 2 egg yolks, beaten with 1 tbsp water and a pinch of salt; Sea salt and freshly ground black pepper",
+        ["2 x 400g beef fillets", "Olive oil", "500g mixture of wild mushrooms", "1 thyme sprig, leaves only", "500g puff pastry", "8 slices of Parma ham", "2 egg yolks", "Sea salt and freshly ground black pepper"],
     },
     {
       id: 2,
@@ -17,6 +17,9 @@ const initialState = {
   ],
 
   localStorageRecipesError: "",
+  editSuccessfully: false,
+  showEdit: false,
+  currentlyEditing: 0,
 };
 
 function recipesReducer(state = initialState, action) {
@@ -61,6 +64,9 @@ function recipesReducer(state = initialState, action) {
       return update(state, {
         recipes: {
           $push: [action.payload],
+        },
+        $merge: {
+          editSuccessfully: true,
         },
       });
 

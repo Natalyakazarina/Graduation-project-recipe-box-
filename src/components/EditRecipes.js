@@ -26,6 +26,8 @@ const useStyles = makeStyles({
 });
 
 function EditRecipes({ addRecipe, errorMessage, editSuccessfully, reset }) {
+  const classes = useStyles();
+
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
@@ -44,10 +46,11 @@ function EditRecipes({ addRecipe, errorMessage, editSuccessfully, reset }) {
     });
   }
 
-  function changeField(name, e) {
+  function addField(name, e) {
     switch (name) {
       case "Name":
         setName(e.target.value);
+
         break;
       case "Description":
         setDescription(e.target.value);
@@ -57,7 +60,10 @@ function EditRecipes({ addRecipe, errorMessage, editSuccessfully, reset }) {
     }
   }
 
-  const classes = useStyles();
+  function clearForm(e) {
+    setName("");
+    setDescription("");
+  }
 
   if (editSuccessfully) {
     reset();
@@ -73,7 +79,7 @@ function EditRecipes({ addRecipe, errorMessage, editSuccessfully, reset }) {
             <label htmlFor="name">{"Name"}</label>
             <TextField
               className={classes.texts}
-              onChange={changeField.bind(this, "Name")}
+              onChange={addField.bind(this, "Name")}
               autoFocus
               margin="dense"
               id="name"
@@ -92,7 +98,7 @@ function EditRecipes({ addRecipe, errorMessage, editSuccessfully, reset }) {
               multiline
               rowsMax={4}
               value={description}
-              onChange={changeField.bind(this, "Description")}
+              onChange={addField.bind(this, "Description")}
               placeholder={`Enter Description`}
               variant="outlined"
             />
@@ -105,7 +111,11 @@ function EditRecipes({ addRecipe, errorMessage, editSuccessfully, reset }) {
           >
             Submit
           </button>
-          <button type="reset" className="btn btn-danger">
+          <button
+            type="reset"
+            className="btn btn-danger"
+            onClick={clearForm.bind(this)}
+          >
             Cancel
           </button>
         </form>

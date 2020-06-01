@@ -6,11 +6,11 @@ function* fetchRecipes() {
   try {
     let recipes = yield call(localStorageService.getItems);
     yield put({
-      type: "RECIPES/LOCAL_STORAGE_SUCCESSFULLY",
+      type: "RECIPES/FETCH_SUCCESSFULLY",
       payload: { recipes },
     });
   } catch ({ message }) {
-    yield put({ type: "RECIPES/LOCAL_STORAGE_ERROR", payload: { message } });
+    yield put({ type: "RECIPES/FETCH_ERROR", payload: { message } });
   }
 }
 

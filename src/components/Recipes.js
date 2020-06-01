@@ -14,6 +14,11 @@ const useStyles = makeStyles({
     width: "1860",
     marginRight: "10px",
   },
+  header: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
 });
 
 function Recipes({
@@ -42,25 +47,36 @@ function Recipes({
 
   return (
     <Container className={classes.container}>
-      {items.length === 0 && <h2>В вашей базе нет рецептов!</h2>}
+      {items.length === 0 && (
+        <div>
+          <h2>В вашей базе нет рецептов!</h2>
+          <img className="picture" src="zhdun.jpg" alt="zhdun" />
+        </div>
+      )}
       {items.length > 0 && <h2>Список всех доступных рецептов</h2>}
+
       <ul className="list-group">
         {items.map(({ id, name, description }) => (
           <li
             key={id}
-            className="list-group-item d-flex justify-content-between align-items-center"
+            className="list-group-item justify-content-between align-items-center"
           >
-            <div>
+            <div className={classes.header}>
               <h3>{name}</h3>
-              <p>{description}</p>
+              <div className="btn btn-group">
+                <button className="btn btn-outline-success">
+                  Edit This Recipe
+                </button>
+                <button
+                  className="btn btn-outline-danger"
+                  onClick={remove.bind(this, id)}
+                >
+                  Remove This Recipe
+                </button>
+              </div>
             </div>
-            <div className="btn btn-group">
-              <button
-                className="btn btn-outline-danger"
-                onClick={remove.bind(this, id)}
-              >
-                Remove
-              </button>
+            <div>
+              <p>{description}</p>
             </div>
           </li>
         ))}
