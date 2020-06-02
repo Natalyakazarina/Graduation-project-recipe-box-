@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
-function EditRecipes({ addRecipe, errorMessage, editSuccessfully, reset }) {
+function EditRecipes({ addRecipe, errorMessage, addSuccessfully, reset }) {
   const classes = useStyles();
 
   const [name, setName] = useState("");
@@ -65,7 +65,7 @@ function EditRecipes({ addRecipe, errorMessage, editSuccessfully, reset }) {
     setDescription("");
   }
 
-  if (editSuccessfully) {
+  if (addSuccessfully) {
     reset();
 
     return <Redirect to="/recipes" />;
@@ -127,7 +127,7 @@ function EditRecipes({ addRecipe, errorMessage, editSuccessfully, reset }) {
 EditRecipes.propTypes = {
   addRecipe: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
-  editSuccessfully: PropTypes.bool,
+  addSuccessfully: PropTypes.bool,
   reset: PropTypes.func,
 };
 

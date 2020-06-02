@@ -2,8 +2,8 @@ import React from "react";
 
 import PropTypes from "prop-types";
 
-function ButtonsList({ editSuccessfully }) {
-  if (editSuccessfully) {
+function ButtonsList({ addSuccessfully }) {
+  if (addSuccessfully) {
     return <button/>
   }
 
@@ -12,7 +12,7 @@ function ButtonsList({ editSuccessfully }) {
 }
 
 ButtonsList.propTypes = {
-  editSuccessfully: PropTypes.bool,
+  addSuccessfully: PropTypes.bool,
 };
 
 export default ButtonsList;
