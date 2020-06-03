@@ -12,7 +12,7 @@ function RemoveRecipes({ items, clearAll }) {
   return (
     <div>
       {items.length > 0 && (
-        <Button
+        <Button className="removed"
           variant="contained"
           onClick={clear}
           color="secondary"

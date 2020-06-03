@@ -7,6 +7,7 @@ const mapStateToProps = (state, ownProps) => {
     localStorageRecipesError: state.recipes.localStorageRecipesError,
     isEditFormVisible: state.recipes.isEditFormVisible,
     currentlyEditing: state.recipes.currentlyEditing,
+    editId: state.recipes.iditId,
     ...ownProps,
   };
 };
@@ -31,11 +32,11 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({
         type: "RECIPES/CLOSE_EDIT_FORM",
       }),
-    editRecipe: (params) =>
+    editRecipe: (editId) =>
       dispatch({
         type: "RECIPES/EDIT_RECIPE",
         payload: {
-          params,
+          editId,
         },
       }),
   };

@@ -17,7 +17,9 @@ import RecipeForm from "./components/RecipeForm";
 import EditRecipes from "./containers/EditRecipes";
 import Recipes from "./containers/Recipes";
 import RemoveRecipes from "./containers/RemoveRecipes";
-import ButtonsList from "./components/ButtonsList";
+import RecipesItem from "./containers/RecipesItem";
+
+import ParticleComponent from "./components/ParticleComponent";
 
 const useStyles = makeStyles({
   root: {
@@ -47,69 +49,93 @@ function App() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <MenuList className={classes.list}>
-          <MenuItem>
-            <FontAwesomeIcon icon={faUtensils} />
-            <NavLink className="nav-link" activeClassName="active" to="/" exact>
-              <Typography variant="h6">Free Code Camp Recipe Box</Typography>
-            </NavLink>
-          </MenuItem>
+    <div className="wrapper">
+      <ParticleComponent />
+      <div className="overlay">
+        <div className={classes.root}>
+          <Paper className={classes.paper}>
+            <MenuList className={classes.list}>
+              <MenuItem>
+                <FontAwesomeIcon icon={faUtensils} />
+                <NavLink
+                  className="nav-link"
+                  activeClassName="active"
+                  to="/"
+                  exact
+                >
+                  <Typography variant="h6">
+                    Free Code Camp Recipe Box
+                  </Typography>
+                </NavLink>
+              </MenuItem>
 
-          <MenuItem>
-            <NavLink activeClassName="active" to="/add-recipes">
-              <Button
-                variant="contained"
-                color="default"
-                className={classes.color}
-              >
-                Add a New Recipe
-              </Button>
-            </NavLink>
-          </MenuItem>
-
-          <MenuItem>
-            <NavLink
-              className="nav-link"
-              activeClassName="active"
-              to="/recipes"
-            >
-              <Button
-                variant="contained"
-                color="default"
-                className={classes.color}
-              >
-                Show All Recipes
-              </Button>
-            </NavLink>
-          </MenuItem>
-          <MenuItem>
-            <RemoveRecipes />
-          </MenuItem>
-          <Typography variant="h6">Recipe List</Typography>
-          <MenuItem>
-            <Button variant="contained" color="default" disableElevation>
-              Beef Wellington
-            </Button>
-          </MenuItem>
-          <MenuItem>
-            <ButtonsList />
-          </MenuItem>
-        </MenuList>
-      </Paper>
-
-      <Switch>
-        <Route exact path="/">
-          <RecipeForm />
-        </Route>
-        <Route path="/add-recipes">
-          <EditRecipes />
-        </Route>
-        <Route path="/recipes">
-          <Recipes />
-        </Route>
-      </Switch>
+              <MenuItem>
+                <NavLink activeClassName="active" to="/add-recipes">
+                  <Button
+                    variant="contained"
+                    color="default"
+                    className={classes.color}
+                  >
+                    Add a New Recipe
+                  </Button>
+                </NavLink>
+              </MenuItem>
+              <MenuItem>
+                <NavLink
+                  className="nav-link"
+                  activeClassName="active"
+                  to="/recipes"
+                >
+                  <Button
+                    variant="contained"
+                    color="default"
+                    className={classes.color}
+                  >
+                    Show All Recipes
+                  </Button>
+                </NavLink>
+              </MenuItem>
+              <MenuItem>
+                <RemoveRecipes />
+              </MenuItem>
+              <MenuItem>
+                <NavLink activeClassName="active" to="/">
+                  <Button
+                    variant="contained"
+                    color="default"
+                    className={classes.color}
+                  >
+                    Hide All Recipes
+                  </Button>
+                </NavLink>
+              </MenuItem>
+              <Typography variant="h6">Recipe List</Typography>
+              <MenuItem>
+                <Button variant="contained" color="default" disableElevation>
+                  Beef Wellington
+                </Button>
+              </MenuItem>
+            </MenuList>
+          </Paper>
+          <Switch>
+            <Route exact path="/">
+              <RecipeForm />
+            </Route>
+            <Route path="/add-recipes">
+              <EditRecipes />
+            </Route>
+            <Route path="/recipes">
+              <Recipes />
+            </Route>
+            <Route path="/">
+              <RecipeForm />
+            </Route>
+            <Route path="/recipes/:id">
+              <RecipesItem />
+            </Route>
+          </Switch>
+        </div>
+      </div>
     </div>
   );
 }

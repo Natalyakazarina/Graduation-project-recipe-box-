@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
-function EditRecipes({ addRecipe, errorMessage, addSuccessfully, reset }) {
+function EditRecipes({ addRecipe, errorMessage, addSuccessfully, reset, currentRecipeId }) {
   const classes = useStyles();
 
   const [name, setName] = useState("");
@@ -43,6 +43,7 @@ function EditRecipes({ addRecipe, errorMessage, addSuccessfully, reset }) {
     addRecipe({
       name,
       description,
+      recipeId: currentRecipeId,
     });
   }
 

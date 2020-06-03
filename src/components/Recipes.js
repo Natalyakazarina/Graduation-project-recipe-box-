@@ -6,6 +6,9 @@ import DialogContent from "@material-ui/core/DialogContent";
 import PropTypes from "prop-types";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles/index";
+import {
+  NavLink
+} from "react-router-dom";
 
 const useStyles = makeStyles({
   container: {
@@ -27,6 +30,7 @@ const useStyles = makeStyles({
 
 function Recipes({
   items,
+  editId,
   onItemRemove,
   fetchRecipes,
   localStorageRecipesError,
@@ -55,8 +59,7 @@ function Recipes({
       onItemRemove(id);
     }
   }
-
-  function addField(name, e) {
+function addField(name, e) {
     switch (name) {
       case "Name":
         setName(e.target.value);
@@ -69,15 +72,21 @@ function Recipes({
         alert("Нет таких значений");
     }
   }
+  
 
   function openForm() {
     openEditForm();
   }
 
-  function editCurrentRecipe(e) {
-    e.preventDefault();
 
-    editRecipe();
+  function editCurrentRecipe(e) {
+    // e.preventDefault();
+
+    
+    editRecipe({
+      name,
+      description,
+    });
   }
 
   return (
@@ -108,14 +117,14 @@ function Recipes({
                 label="Name"
                 type="text"
                 fullWidth
-                value={name}
+                defaultValue={name}
               />
               <TextField
                 id="description"
                 label="Description"
                 multiline
                 rowsMax={4}
-                value={description}
+                defaultValue={description}
                 onChange={addField.bind(this, "Description")}
                 fullWidth
               />
@@ -150,6 +159,7 @@ function Recipes({
                 <button className="btn btn-outline-success" onClick={openForm}>
                   Edit This Recipe
                 </button>
+                <button className="btn btn-outline-primary"><NavLink className='nav-link' to={`/recipes/${id}`}>Show details</NavLink></button>
                 <button
                   className="btn btn-outline-danger"
                   onClick={remove.bind(this, id)}

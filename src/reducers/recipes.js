@@ -36,8 +36,12 @@ const initialState = {
 
   localStorageRecipesError: "",
   addSuccessfully: false,
-  // currentlyEditing: 0,
+  editId: null,
   isEditFormVisible: false,
+  recipeData: null,
+  fetchRecipeDataError: "",
+  // recipeName: "",
+  // recipeDescription: "",
 };
 
 function recipesReducer(state = initialState, action) {
@@ -109,39 +113,37 @@ function recipesReducer(state = initialState, action) {
         },
       });
 
-      case "RECIPES/OPEN_EDIT_FORM":
+    case "RECIPES/OPEN_EDIT_FORM":
       return update(state, {
-        $merge: {
-          isEditFormVisible: false,
-        },
-      });
-
-    case "RECIPES/EDIT_RECIPE":
-      const recipesToEdit = state.recipes.slice();
-      let indexToEdit;
-      recipesToEdit.forEach((recipe, index) => {
-        if (recipe.id === action.payload.id) {
-          indexToEdit = index;
-          recipe.name = action.name;
-          recipe.description = action.descriptions;
-        }
-      });
-
-      return update(state, {
-        recipesToEdit: {
-          [indexToEdit]: {
-            name: {
-              $set: recipesToEdit[indexToEdit].name,
-            },
-            description: {
-              $set: recipesToEdit[indexToEdit].description,
-            },
-          },
-        },
         $merge: {
           isEditFormVisible: true,
         },
       });
+
+    case "RECIPES/EDIT_RECIPE":
+      let editId = null;
+
+      return update(state, {
+        $merge: {
+          editId: action.payload.id,
+        },
+      });
+
+    case "RECIPES/FETCH_RECIPE_DATA_SUCCESSFULLY":
+      const recipeData = action.payload;
+      return update(state, {
+        $merge: {
+          recipeData,
+        },
+      });
+
+    case "RECIPES/FETCH_RECIPE_DATA_ERROR":
+      return update(state, {
+        $merge: {
+          fetchRecipeDataError: action.payload.message,
+        },
+      });
+
     default:
       return state;
   }

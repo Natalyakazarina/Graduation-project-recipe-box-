@@ -23,6 +23,14 @@ class RecipesService {
 
     return recipes;
   }
+
+  getData() {
+    const recipeData = window.localStorage.getItem(DATA_KEY);
+
+    
+
+    return recipeData;
+  }
 }
 
 export default new RecipesService();
