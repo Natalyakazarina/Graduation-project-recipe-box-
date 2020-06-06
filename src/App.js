@@ -45,7 +45,7 @@ const useStyles = makeStyles({
   },
 });
 
-function App() {
+function App({ items }) {
   const classes = useStyles();
 
   return (
@@ -56,9 +56,9 @@ function App() {
           <Paper className={classes.paper}>
             <MenuList className={classes.list}>
               <MenuItem>
-                <FontAwesomeIcon icon={faUtensils} />
+                <FontAwesomeIcon className="icon" icon={faUtensils} />
                 <NavLink
-                  className="nav-link"
+                  className="nav-links"
                   activeClassName="active"
                   to="/"
                   exact
@@ -70,7 +70,11 @@ function App() {
               </MenuItem>
 
               <MenuItem>
-                <NavLink activeClassName="active" to="/add-recipes">
+                <NavLink
+                  className="nav-links"
+                  activeClassName="active"
+                  to="/add-recipes"
+                >
                   <Button
                     variant="contained"
                     color="default"
@@ -82,7 +86,7 @@ function App() {
               </MenuItem>
               <MenuItem>
                 <NavLink
-                  className="nav-link"
+                  className="nav-links"
                   activeClassName="active"
                   to="/recipes"
                 >
@@ -99,7 +103,7 @@ function App() {
                 <RemoveRecipes />
               </MenuItem>
               <MenuItem>
-                <NavLink activeClassName="active" to="/">
+                <NavLink className="nav-links" activeClassName="active" to="/">
                   <Button
                     variant="contained"
                     color="default"
@@ -109,12 +113,13 @@ function App() {
                   </Button>
                 </NavLink>
               </MenuItem>
-              <Typography variant="h6">Recipe List</Typography>
-              <MenuItem>
-                <Button variant="contained" color="default" disableElevation>
-                  Beef Wellington
-                </Button>
-              </MenuItem>
+              <div className="render-recipes">
+                {items.map(({ index, name }) => (
+                  <div key={index}>
+                    <button className="btn btn-outline-light">{name}</button>
+                  </div>
+                ))}
+              </div>
             </MenuList>
           </Paper>
           <Switch>

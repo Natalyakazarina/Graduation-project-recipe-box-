@@ -2,43 +2,42 @@ import { call, put, takeLatest, all } from "redux-saga/effects";
 
 import localStorageService from "../services/localStorageService";
 
+import Actions from "./../actions/recipes";
+
 function* fetchRecipes() {
   try {
     let recipes = yield call(localStorageService.get);
-    yield put({
-      type: "RECIPES/FETCH_RECIPES_SUCCESSFULLY",
-      payload: { recipes },
-    });
+    yield put(Actions["RECIPES/FETCH_RECIPES_SUCCESSFULLY"]({ recipes }));
   } catch ({ message }) {
     console.error(message);
-    yield put({ type: "RECIPES/FETCH_RECIPES_ERROR", payload: { message } });
+    yield put(Actions["RECIPES/FETCH_RECIPES_ERROR"]({ message }));
   }
 }
 
 function* addRecipe(action) {
-  let currentRecipe = yield call(
-    localStorageService.save,
-    action.payload.params
-  );
-  yield put({
-    type: "RECIPES/ADDED_NEW_RECIPE_SUCCESSFULLY",
-    payload: action.payload.params,
-  });
+  try {
+    let currentRecipe = yield call(
+      localStorageService.save,
+      action.payload.params
+    );
+    yield put(
+      Actions["RECIPES/ADDED_NEW_RECIPE_SUCCESSFULLY"]({ currentRecipe })
+    );
+  } catch ({ message }) {
+    console.error(message);
+    yield put(Actions["RECIPES/ADDED_NEW_RECIPE_ERROR"]({ message }));
+  }
 }
 
 function* fetchRecipeData(action) {
   try {
     let recipeData = yield call(localStorageService.getData);
-    yield put({
-      type: "RECIPES/FETCH_RECIPE_DATA_SUCCESSFULLY",
-      payload: { recipeData },
-    });
+    yield put(
+      Actions["RECIPES/FETCH_RECIPE_DATA_SUCCESSFULLY"]({ recipeData })
+    );
   } catch ({ message }) {
     console.error(message);
-    yield put({
-      type: "RECIPES/FETCH_RECIPE_DATA_ERROR",
-      payload: { message },
-    });
+    yield put(Actions["RECIPES/FETCH_RECIPE_DATA_ERROR"]({ message }));
   }
 }
 

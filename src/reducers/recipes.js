@@ -1,4 +1,7 @@
 import update from "immutability-helper";
+import { handleActions } from "redux-actions";
+
+import Actions from "./../actions/recipes";
 
 const initialState = {
   recipes: [
@@ -40,27 +43,27 @@ const initialState = {
   isEditFormVisible: false,
   recipeData: null,
   fetchRecipeDataError: "",
-  // recipeName: "",
-  // recipeDescription: "",
 };
 
-function recipesReducer(state = initialState, action) {
-  switch (action.type) {
-    case "RECIPES/FETCH_RECIPES_SUCCESSFULLY":
+const recipesReducer = handleActions(
+  {
+    [Actions["RECIPES/FETCH_RECIPES_SUCCESSFULLY"]]: (state, action) => {
       return update(state, {
         $merge: {
           recipes: action.payload.recipes,
         },
       });
+    },
 
-    case "RECIPES/FETCH_RECIPES_ERROR":
+    [Actions["RECIPES/FETCH_RECIPES_ERROR"]]: (state, action) => {
       return update(state, {
         $merge: {
           localStorageRecipesError: action.payload.message,
         },
       });
+    },
 
-    case "RECIPES/RECIPE_REMOVE":
+    [Actions["RECIPES/RECIPE_REMOVE"]]: (state, action) => {
       const fromState = state.recipes.slice();
       let indexToRemove;
       fromState.forEach((recipe, index) => {
@@ -74,15 +77,17 @@ function recipesReducer(state = initialState, action) {
           recipes: fromState,
         },
       });
+    },
 
-    case "RECIPES/ALL_REMOVE":
+    [Actions["RECIPES/ALL_REMOVE"]]: (state, action) => {
       return update(state, {
         $set: {
           recipes: [],
         },
       });
+    },
 
-    case "RECIPES/ADDED_NEW_RECIPE_SUCCESSFULLY":
+    [Actions["RECIPES/ADDED_NEW_RECIPE_SUCCESSFULLY"]]: (state, action) => {
       return update(state, {
         recipes: {
           $push: [action.payload],
@@ -91,36 +96,41 @@ function recipesReducer(state = initialState, action) {
           addSuccessfully: true,
         },
       });
+    },
 
-    case "RECIPES/ADDED_NEW_RECIPE_ERROR":
+    [Actions["RECIPES/ADDED_NEW_RECIPE_ERROR"]]: (state, action) => {
       return update(state, {
         $merge: {
           createRecipeErrorMessage: action.payload.message,
         },
       });
+    },
 
-    case "RECIPES/RESET_EDIT":
+    [Actions["RECIPES/RESET_EDIT"]]: (state, action) => {
       return update(state, {
         $merge: {
           addSuccessfully: initialState.addSuccessfully,
         },
       });
+    },
 
-    case "RECIPES/CLOSE_EDIT_FORM":
+    [Actions["RECIPES/CLOSE_EDIT_FORM"]]: (state, action) => {
       return update(state, {
         $merge: {
           isEditFormVisible: false,
         },
       });
+    },
 
-    case "RECIPES/OPEN_EDIT_FORM":
+    [Actions["RECIPES/OPEN_EDIT_FORM"]]: (state, action) => {
       return update(state, {
         $merge: {
           isEditFormVisible: true,
         },
       });
+    },
 
-    case "RECIPES/EDIT_RECIPE":
+    [Actions["RECIPES/EDIT_RECIPE"]]: (state, action) => {
       let editId = null;
 
       return update(state, {
@@ -128,25 +138,26 @@ function recipesReducer(state = initialState, action) {
           editId: action.payload.id,
         },
       });
+    },
 
-    case "RECIPES/FETCH_RECIPE_DATA_SUCCESSFULLY":
+    [Actions["RECIPES/FETCH_RECIPE_DATA_SUCCESSFULLY"]]: (state, action) => {
       const recipeData = action.payload;
       return update(state, {
         $merge: {
           recipeData,
         },
       });
+    },
 
-    case "RECIPES/FETCH_RECIPE_DATA_ERROR":
+    [Actions["RECIPES/FETCH_RECIPE_DATA_ERROR"]]: (state, action) => {
       return update(state, {
         $merge: {
           fetchRecipeDataError: action.payload.message,
         },
       });
-
-    default:
-      return state;
-  }
-}
+    },
+  },
+  initialState
+);
 
 export default recipesReducer;

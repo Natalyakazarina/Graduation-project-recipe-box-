@@ -9,8 +9,8 @@
 body {
   margin: 0;
   width: 100%;
-    max-width: 100%;
-    overflow-y: hidden;
+  max-width: 100%;
+  overflow-y: hidden;
 }
 
 .cutlery {
@@ -28,10 +28,13 @@ body {
 }
 
 .picture {
-  width: 300px;
-  height: 300px;
-  margin: auto;
-  margin-top: 50px;
+  border-radius: 10%;
+  display: block;
+  margin: 30px auto;
+}
+
+.icon {
+  margin-right: 20px;
 }
 
 .wrapper {
@@ -39,7 +42,6 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  text-align: center;
 }
 
 .overlay {
@@ -50,5 +52,78 @@ body {
 }
 
 .removed {
+  width: 300px;
+}
+
+.add-form {
+  margin: auto;
+  position: absolute;
+  top: 35%;
+  left: 40%;
+}
+
+.buttons-changes {
+  margin-top: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+.changes {
+  width: 150px;
+}
+
+.label {
+  font-weight: 500;
+  font-style: italic;
+}
+
+.Navlinks {
+  color: #fff;
+  text-decoration: none;
+}
+
+.Navlinks:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-links {
+  color: #000;
+  text-decoration: none;
+}
+
+.nav-links:hover {
+  color: rgb(78, 15, 114);
+  text-decoration: none;
+}
+
+.Navlinks:active {
+  color: teal;
+  text-decoration: none;
+}
+
+.text-recipes {
+  text-align: center;
+  margin-top: 10%;
+}
+
+.recipe-list {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.render-recipes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5px;
+  justify-content: space-around;
+}
+
+.btn-outline-light {
+  margin-top: 5px;
   width: 300px;
 }

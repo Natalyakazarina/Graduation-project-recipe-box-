@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import TextField from "@material-ui/core/TextField";
-import DialogContent from "@material-ui/core/DialogContent";
+import React, { useEffect } from "react";
+
 import PropTypes from "prop-types";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles/index";
-import { Redirect } from "react-router-dom";
+import EditAddForm from "./EditAddForm";
 
 const useStyles = makeStyles({
   container: {
@@ -14,7 +13,7 @@ const useStyles = makeStyles({
     height: "500px",
     backgroundColor: "#508cf9",
     marginTop: "5%",
-    width: "1860",
+    width: "1860px",
     marginRight: "10px",
   },
   texts: {
@@ -25,11 +24,8 @@ const useStyles = makeStyles({
   },
 });
 
-function EditRecipes({ addRecipe, errorMessage, addSuccessfully, reset, currentRecipeId }) {
+function EditRecipes({ addRecipe, errorMessage }) {
   const classes = useStyles();
-
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
 
   useEffect(() => {
     if (errorMessage) {
@@ -37,99 +33,18 @@ function EditRecipes({ addRecipe, errorMessage, addSuccessfully, reset, currentR
     }
   }, [errorMessage]);
 
-  function saveRecipe(e) {
-    e.preventDefault();
-
-    addRecipe({
-      name,
-      description,
-      recipeId: currentRecipeId,
-    });
-  }
-
-  function addField(name, e) {
-    switch (name) {
-      case "Name":
-        setName(e.target.value);
-
-        break;
-      case "Description":
-        setDescription(e.target.value);
-        break;
-      default:
-        alert("Нет таких значений");
-    }
-  }
-
-  function clearForm(e) {
-    setName("");
-    setDescription("");
-  }
-
-  if (addSuccessfully) {
-    reset();
-
-    return <Redirect to="/recipes" />;
-  }
-
   return (
     <Container className={classes.container}>
       <div>
-        <form>
-          <DialogContent>
-            <label htmlFor="name">{"Name"}</label>
-            <TextField
-              className={classes.texts}
-              onChange={addField.bind(this, "Name")}
-              autoFocus
-              margin="dense"
-              id="name"
-              placeholder={`Enter Name`}
-              type="text"
-              fullWidth
-              value={name}
-              variant="outlined"
-            />
-
-            <label htmlFor="standard-multiline-flexible">{"Description"}</label>
-
-            <TextField
-              className={classes.texts}
-              id="standard-multiline-flexible"
-              multiline
-              rowsMax={4}
-              value={description}
-              onChange={addField.bind(this, "Description")}
-              placeholder={`Enter Description`}
-              variant="outlined"
-            />
-          </DialogContent>
-
-          <button
-            type="submit"
-            className="btn btn-success"
-            onClick={saveRecipe}
-          >
-            Submit
-          </button>
-          <button
-            type="reset"
-            className="btn btn-danger"
-            onClick={clearForm.bind(this)}
-          >
-            Cancel
-          </button>
-        </form>
+        <EditAddForm onSubmit={(data) => addRecipe(data)}/>
       </div>
     </Container>
   );
 }
 
 EditRecipes.propTypes = {
-  addRecipe: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
-  addSuccessfully: PropTypes.bool,
-  reset: PropTypes.func,
+  addRecipe: PropTypes.func,
 };
 
 export default EditRecipes;

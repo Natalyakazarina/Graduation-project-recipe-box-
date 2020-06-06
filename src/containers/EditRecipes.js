@@ -4,7 +4,7 @@ import EditRecipes from "../components/EditRecipes";
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    // errorMessage: state.recipes.createRecipeErrorMessage,
+    items: state.recipes.recipes,
     addSuccessfully: state.recipes.addSuccessfully,
     localStorageRecipesError: state.recipes.localStorageRecipesError,
     ...ownProps,
