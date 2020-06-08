@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-
+import Actions from "./../actions/recipes";
 import EditRecipes from "../components/EditRecipes";
 
 const mapStateToProps = (state, ownProps) => {
@@ -10,19 +10,11 @@ const mapStateToProps = (state, ownProps) => {
     ...ownProps,
   };
 };
+
 const mapDispatchToProps = (dispatch, state) => {
   return {
-    addRecipe: (params) =>
-      dispatch({
-        type: "RECIPES/ADDED_NEW_RECIPE",
-        payload: {
-          params,
-        },
-      }),
-    reset: () =>
-      dispatch({
-        type: "RECIPES/RESET_EDIT",
-      }),
+    addRecipe: (params) => dispatch(Actions["RECIPES/ADDED_NEW_RECIPE"](params)),
+    reset: () => dispatch(Actions["RECIPES/RESET_EDIT"]()),
   };
 };
 

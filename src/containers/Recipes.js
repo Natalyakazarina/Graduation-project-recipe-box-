@@ -1,46 +1,25 @@
 import { connect } from "react-redux";
 import Recipes from "../components/Recipes";
+import Actions from "./../actions/recipes";
 
 const mapStateToProps = (state, ownProps) => {
   return {
     items: state.recipes.recipes,
     localStorageRecipesError: state.recipes.localStorageRecipesError,
     isEditFormVisible: state.recipes.isEditFormVisible,
-    currentlyEditing: state.recipes.currentlyEditing,
+    // currentlyEditing: state.recipes.currentlyEditing,
     editId: state.recipes.iditId,
     ...ownProps,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    onItemRemove: (id) =>
-      dispatch({
-        type: "RECIPES/RECIPE_REMOVE",
-        payload: {
-          id,
-        },
-      }),
-    fetchRecipes: () =>
-      dispatch({
-        type: "RECIPES/FETCH_RECIPES",
-      }),
-    openEditForm: () =>
-      dispatch({
-        type: "RECIPES/OPEN_EDIT_FORM",
-      }),
-    closeEditForm: () =>
-      dispatch({
-        type: "RECIPES/CLOSE_EDIT_FORM",
-      }),
-    editRecipe: (editId) =>
-      dispatch({
-        type: "RECIPES/EDIT_RECIPE",
-        payload: {
-          editId,
-        },
-      }),
+    onItemRemove: (id) => dispatch(Actions["RECIPES/RECIPE_REMOVE"](id)),
+    fetchRecipes: () => dispatch(Actions["RECIPES/FETCH_RECIPES"]()),
+    openEditForm: (id) => dispatch(Actions["RECIPES/OPEN_EDIT_FORM"]()),
+    closeEditForm: () => dispatch(Actions["RECIPES/CLOSE_EDIT_FORM"]()),
+    editRecipe: (editId) => dispatch(Actions["RECIPES/CLOSE_EDIT_FORM"](editId)),
   };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Recipes);
-

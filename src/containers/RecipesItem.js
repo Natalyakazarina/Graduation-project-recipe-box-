@@ -1,19 +1,17 @@
 import {connect} from 'react-redux';
-
+import Actions from "./../actions/recipes";
 import RecipesItem from "../components/RecipesItem";
 
 const mapStateToProps = state => {
   return {
-    recipesData: state.recipes.recipesData,
-    fetchRecipeDataError: state.recipes.fetchRecipeDataError
+    recipeData: state.recipes.recipeData,
+    fetchRecipeDataError: state.recipes.fetchRecipeDataError,
   }
 };
+
 const mapDispatchToProps = dispatch => {
   return {
-    fetchRecipeData: (id) => dispatch({
-        type: "RECIPES/FETCH_RECIPE_DATA",
-        payload: id,
-      }),
+    fetchRecipeData: (id) => dispatch(Actions["RECIPES/FETCH_RECIPE_DATA"](id)),
   };
 };
 

@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import { useParams } from "react-router-dom";
 import EditRecipes from "../containers/EditRecipes";
 
-function RecipesItem({ recipesData, fetchRecipeData, fetchRecipeDataError }) {
+function RecipesItem({ recipeData, fetchRecipeData, fetchRecipeDataError }) {
   let { id } = useParams();
 
   useEffect(() => {
@@ -23,14 +23,14 @@ function RecipesItem({ recipesData, fetchRecipeData, fetchRecipeDataError }) {
   return (
     <Container>
       <Typography variant="h4">Recipe Data</Typography>
-      {recipesData && (
+      {recipeData && (
         <Card variant="outlined">
           <CardContent>
             <Typography variant="h5" component="h2">
-              {recipesData.name}
+              {recipeData.name}
             </Typography>
             <Typography color="textSecondary">
-              {recipesData.description}
+              {recipeData.description}
             </Typography>
           </CardContent>
         </Card>
@@ -42,7 +42,7 @@ function RecipesItem({ recipesData, fetchRecipeData, fetchRecipeDataError }) {
 
 RecipesItem.propTypes = {
   fetchRecipeData: PropTypes.func.isRequired,
-  recipesData: PropTypes.object,
+  recipeData: PropTypes.object,
   fetchRecipeDataError: PropTypes.string,
 };
 

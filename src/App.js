@@ -129,7 +129,7 @@ function App({ items }) {
             <Route path="/add-recipes">
               <EditRecipes />
             </Route>
-            <Route path="/recipes">
+            <Route path="/recipes" exact>
               <Recipes />
             </Route>
             <Route path="/">
