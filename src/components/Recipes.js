@@ -90,9 +90,9 @@ function Recipes({
       }
 
       <ul className="list-group">
-        {items.map(({ id, index, name, description }) => (
+        {items.map(({ id, name, description }) => (
           <li
-            key={index}
+            key={id}
             className="list-group-item justify-content-between align-items-center"
           >
             <div className={classes.header}>
