@@ -114,8 +114,8 @@ function App({ items }) {
                 </NavLink>
               </MenuItem>
               <div className="render-recipes">
-                {items.map(({ index, name }) => (
-                  <div key={index}>
+                {items.map(({ id, name }) => (
+                  <div key={id}>
                     <button className="btn btn-outline-light">{name}</button>
                   </div>
                 ))}
@@ -135,7 +135,7 @@ function App({ items }) {
             <Route path="/">
               <RecipeForm />
             </Route>
-            <Route path="/recipes/:id">
+            <Route path="/recipe-item/:id">
               <RecipesItem />
             </Route>
           </Switch>
