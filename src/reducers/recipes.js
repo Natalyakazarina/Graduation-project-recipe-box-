@@ -4,36 +4,7 @@ import { handleActions } from "redux-actions";
 import Actions from "./../actions/recipes";
 
 const initialState = {
-  recipes: [{
-    id: 1,
-    name: "Beef Wellington",
-    description: [
-      "2 x 400g beef fillets",
-      "Olive oil",
-      "500g mixture of wild mushrooms",
-      "1 thyme sprig, leaves only",
-      "500g puff pastry",
-      "8 slices of Parma ham",
-      "2 egg yolks",
-      "Sea salt and freshly ground black pepper",
-    ],
-  },
-  {
-    id: 2,
-    name: "Cajun Chicken Pasta",
-    description: [
-      "4 ounces linguine pasta",
-      "2 skinless boneless chicken breast halves",
-      "2 teaspoons Cajun seasoning",
-      "2 tablespoons butter",
-      "1 red bell sliced pepper",
-      "1 green bell sliced pepper",
-      "4 fresh sliced mushrooms",
-      "1 green chopped onion",
-      "1 cup heavy cream",
-      "¼ cup grated Parmesan cheese",
-    ],
-  },],
+  recipes: [],
 
   localStorageRecipesError: "",
   addSuccessfully: false,
