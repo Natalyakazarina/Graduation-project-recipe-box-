@@ -18,12 +18,16 @@ const useStyles = makeStyles({
     marginRight: "10px",
   },
   title: {
-    marginBottom: "30px",
+    marginBottom: "10%",
+    fontSize:"3rem",
+  },
+  heading: {
+    fontSize:"2rem",
   },
   fonts: {
-    maxWidth: "50%",
+    fontSize:"1rem",
     fontWeight: "400px",
-    marginTop: "20px",
+    marginTop: "5%",
   },
 });
 
@@ -32,15 +36,17 @@ function RecipeForm() {
 
   return (
     <Container className={classes.container}>
-      <Typography variant="h2" className={classes.title}>
-        This is a Recipe App
-      </Typography>
-      <Typography variant="h4">You can record your recipes here</Typography>
-      <Typography variant="h6" className={classes.fonts}>
-        All your recipes are stored in your browser's local storage and any
-        changes you make will remain saved as long as you continue to access
-        this page from the same browser.
-      </Typography>
+      <div className="main-block">
+        <Typography variant="h2" className={classes.title}>
+          This is a Recipe App
+        </Typography>
+        <Typography variant="h4" className={classes.heading}>You can record your recipes here</Typography>
+        <Typography variant="h6" className={classes.fonts}>
+          All your recipes are stored in your browser's local storage and any
+          changes you make will remain saved as long as you continue to access
+          this page from the same browser.
+        </Typography>
+      </div>
     </Container>
   );
 }

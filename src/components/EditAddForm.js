@@ -18,9 +18,12 @@ const useStyles = makeStyles({
     marginRight: "10px",
   },
   texts: {
-    width: "600px",
     display: "flex",
     flexDirection: "column",
+    maxWidth: "100%",
+    margin: "auto",
+    fontSize: "20px",
+    overflow: "hidden",
     backgroundColor: "#fff",
   },
 });
@@ -30,14 +33,15 @@ const EditAddForm = ({ items, onSubmit, reset, addSuccessfully }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
-  useEffect((e) => {
-    if (items) {
-      setName(items.name);
-      setDescription(items.description);
-    }
-   
-  }, [items]);
-
+  useEffect(
+    (e) => {
+      if (items) {
+        setName(items.name);
+        setDescription(items.description);
+      }
+    },
+    [items]
+  );
 
   if (addSuccessfully) {
     reset();
@@ -58,6 +62,22 @@ const EditAddForm = ({ items, onSubmit, reset, addSuccessfully }) => {
     setDescription("");
   }
 
+
+  function addField(name, e) {
+    switch (name) {
+      case "Name":
+        setName(e.target.value);
+
+        break;
+      case "Description":
+        setDescription(e.target.value);
+        break;
+      default:
+        alert("Нет таких значений");
+    }
+  }
+
+
   return (
     <div>
       <form>
@@ -68,7 +88,7 @@ const EditAddForm = ({ items, onSubmit, reset, addSuccessfully }) => {
             </label>
             <TextField
               className={classes.texts}
-              onChange={setName}
+              onChange={addField.bind(this, "Name")}
               autoFocus
               margin="dense"
               id="name"
@@ -87,32 +107,32 @@ const EditAddForm = ({ items, onSubmit, reset, addSuccessfully }) => {
               multiline
               rowsMax={6}
               value={description}
-              onChange={setDescription}
+              onChange={addField.bind(this, "Description")}
               placeholder={`Enter Description`}
               variant="outlined"
             />
-         
-          <div className="buttons-changes">
-            <button type="reset" className="changes btn btn-danger">
-              <NavLink className="Navlinks" to={`/recipes`}>
-                Cancel
-              </NavLink>
-            </button>
-            <button
-              type="reset"
-              className="changes btn btn-secondary"
-              onClick={clearForm.bind(this)}
-            >
-              Reset
-            </button>
-            <button
-              type="submit"
-              className="changes btn btn-success"
-              onClick={submit}
-            >
-              Submit
-            </button>
-          </div>
+
+            <div className="buttons-changes">
+              <button type="reset" className="changes btn btn-danger">
+                <NavLink className="Navlinks" to={`/recipes`}>
+                  Cancel
+                </NavLink>
+              </button>
+              <button
+                type="reset"
+                className="changes btn btn-secondary"
+                onClick={clearForm.bind(this)}
+              >
+                Reset
+              </button>
+              <button
+                type="submit"
+                className="changes btn btn-success"
+                onClick={submit}
+              >
+                Submit
+              </button>
+            </div>
           </DialogContent>
         </div>
       </form>
@@ -122,7 +142,7 @@ const EditAddForm = ({ items, onSubmit, reset, addSuccessfully }) => {
 
 EditAddForm.propTypes = {
   onSubmit: PropTypes.func,
-    items: PropTypes.object,
+  items: PropTypes.object,
 };
 
 export default EditAddForm;

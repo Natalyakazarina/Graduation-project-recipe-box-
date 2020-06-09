@@ -46,6 +46,10 @@ const useStyles = makeStyles({
 });
 
 function App({ items }) {
+  if (items.length === 0) {
+    alert("Array is empty");
+  }
+
   const classes = useStyles();
 
   return (

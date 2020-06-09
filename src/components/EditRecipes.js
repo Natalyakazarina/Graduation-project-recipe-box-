@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-function EditRecipes({ addRecipe, errorMessage }) {
+function EditRecipes({ addRecipe, errorMessage, name, description, currentRecipeId }) {
   const classes = useStyles();
 
   useEffect(() => {
@@ -33,10 +33,21 @@ function EditRecipes({ addRecipe, errorMessage }) {
     }
   }, [errorMessage]);
 
+
+  function saveRecipe(e) {
+    e.preventDefault();
+
+    addRecipe({
+      name,
+      description,
+      recipeId: currentRecipeId,
+    });
+  }
+
   return (
     <Container className={classes.container}>
       <div>
-        <EditAddForm onSubmit={(data) => addRecipe(data)}/>
+        <EditAddForm onSubmit={saveRecipe.bind(this)}/>
       </div>
     </Container>
   );
