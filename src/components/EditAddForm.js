@@ -54,7 +54,7 @@ const EditAddForm = ({ items, onSubmit, reset, addSuccessfully }) => {
     if (items) {
       obj.id = items.id;
     }
-    onSubmit.bind(this, obj);
+    onSubmit(obj);
   };
 
   function clearForm() {

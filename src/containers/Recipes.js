@@ -19,6 +19,7 @@ const mapDispatchToProps = (dispatch) => {
     openEditForm: (id) => dispatch(Actions["RECIPES/OPEN_EDIT_FORM"]()),
     closeEditForm: () => dispatch(Actions["RECIPES/CLOSE_EDIT_FORM"]()),
     editRecipe: (editId) => dispatch(Actions["RECIPES/CLOSE_EDIT_FORM"](editId)),
+    addRecipe: (params) => dispatch(Actions["RECIPES/ADDED_NEW_RECIPE"](params)),
   };
 };
 

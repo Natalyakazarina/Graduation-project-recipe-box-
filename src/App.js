@@ -46,9 +46,9 @@ const useStyles = makeStyles({
 });
 
 function App({ items }) {
-  if (items.length === 0) {
-    alert("Array is empty");
-  }
+  // if (items.length === 0) {
+  //   alert("Array is empty");
+  // }
 
   const classes = useStyles();
 
@@ -118,8 +118,8 @@ function App({ items }) {
                 </NavLink>
               </MenuItem>
               <div className="render-recipes">
-                {items.map(({ id, name }) => (
-                  <div key={id}>
+                {items.map(({ index, name }) => (
+                  <div key={index}>
                     <button className="btn btn-outline-light">{name}</button>
                   </div>
                 ))}
@@ -135,9 +135,6 @@ function App({ items }) {
             </Route>
             <Route path="/recipes" exact>
               <Recipes />
-            </Route>
-            <Route path="/">
-              <RecipeForm />
             </Route>
             <Route path="/recipe-item/:id">
               <RecipesItem />

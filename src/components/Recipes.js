@@ -81,7 +81,7 @@ function Recipes({
           >
             <EditAddForm
               key={id}
-              onSubmit={(data) => addRecipe(data)}
+              onSubmit={(data) => addRecipe(data)} items={{name: items.name, description: items.description}}
               name={items.name}
               description={items.description}
             />

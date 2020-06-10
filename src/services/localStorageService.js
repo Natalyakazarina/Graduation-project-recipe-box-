@@ -15,7 +15,7 @@ class RecipesService {
   get() {
     const dataRaw = window.localStorage.getItem(DATA_KEY);
 
-    let recipes;
+    let recipes = [];
 
     if (dataRaw) {
       recipes = JSON.parse(dataRaw);
